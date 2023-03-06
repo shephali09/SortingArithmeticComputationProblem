@@ -18,8 +18,11 @@ results["Result2"]=$arithmeticOperation2
 results["Result3"]=$arithmeticOperation3 
 results["Result4"]=$arithmeticOperation4 
 
-array=()
-for key in "${!results[@]}"
+sorted_keys=($(echo "${!results[@]}" | tr ' ' '\n' | sort -nrk3 | tr '\n' ' '))
+sorted_values=($(echo "${results[@]}" | tr ' ' '\n' | sort -nr | tr '\n' ' '))
+
+echo "Results (in descending order):"
+for i in ${!sorted_keys[@]}
 do
-  array+=("${results[$key]}")
+  echo "${sorted_keys[$i]} = ${sorted_values[$i]}"
 done
